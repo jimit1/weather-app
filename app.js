@@ -81,7 +81,7 @@ $(document).ready(function () {
     );
     for (var i = 1; i < 6; i++) {
       $("#forecast").append(`
-      <div class="card ml-3" style="max-width: 9rem;">
+      <div class="card ml-3 mb-3" style="max-width: 9rem;">
         <div class="card-body bg-dark text-light">
           <h5 class="card-title">${timeConverter(res.daily[i].dt).date}</h5>
           <div class="card-text">${res.daily[i].weather[0].main}</div>
