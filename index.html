@@ -9,7 +9,6 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="style.css" />
     <title>Weather App</title>
   </head>
   <body>
@@ -18,23 +17,36 @@
     >
       Weather Dashboard
     </nav>
-    <form>
-      <input
-        autofocus
-        id="textInput"
-        type="text"
-        placeholder="Enter Movie to search"
-      />
-      <button id="submitBtn">Submit</button>
-      <button id="reset">Reset</button>
-    </form>
-    <div class="container"></div>
-    <!-- <ul id="movieList">
-      <ul id="movieList"></ul>
-    </ul> -->
+    <div class="container m-0">
+      <div class="row">
+        <div class="col-sm-3 left-panel pt-3">
+          <form>
+            <input
+              autofocus
+              id="textInput"
+              type="text"
+              placeholder="Enter Movie to search"
+              style="max-width: 7rem;"
+            />
+            <button id="submitBtn" style="max-width: 2rem;">S</button>
+            <button id="reset" style="max-width: 2rem;">R</button>
+          </form>
+          <div class="card mt-3" style="max-width: 16rem;">
+            <ul class="list-group list-group-flush" id="listItem"></ul>
+          </div>
+        </div>
+        <div class="col-sm-9 right-panel pt-3"></div>
+      </div>
+    </div>
+
     <script
       src="https://code.jquery.com/jquery-3.5.0.min.js"
       integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.min.js"
+      integrity="sha256-TbOIe++NbC9P3KTtUMJ5wcROlBdnRqrPleLdpPg3xxE="
       crossorigin="anonymous"
     ></script>
     <script src="app.js"></script>
