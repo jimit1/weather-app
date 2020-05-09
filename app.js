@@ -40,7 +40,7 @@ $(document).ready(function () {
     $.ajax({
       type: "GET",
       dataType: "json",
-      url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`,
+      url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`,
     }).then(function (res) {
       render(cityName, res);
     });
@@ -58,10 +58,9 @@ $(document).ready(function () {
       )})</h5><img style="float:left" src="http://openweathermap.org/img/wn/${
         res.current.weather[0].icon
       }@2x.png"/></div>
-              <div class="card-text">Temperature: ${(
-                (res.current.temp - 273.15) * 1.8 +
-                32
-              ).toFixed(2)} °F</div>
+              <div class="card-text">Temperature: ${res.current.temp.toFixed(
+                2
+              )} °F</div>
               <div class="card-text">Humidity: ${res.current.humidity} %</div>
               <div class="card-text">Wind Speed: ${
                 res.current.wind_speed
@@ -79,10 +78,7 @@ $(document).ready(function () {
           <div class="card-text"><img src="http://openweathermap.org/img/wn/${
             res.daily[i].weather[0].icon
           }@2x.png"/></div>
-          <div class="card-text">T: ${(
-            (res.daily[i].temp.day - 273.15) * 1.8 +
-            32
-          ).toFixed(2)} °F</div>
+          <div class="card-text">T: ${res.daily[i].temp.day.toFixed(2)} °F</div>
           <div class="card-text">Humidity:${res.daily[i].humidity}%</div>
         
       </div>
