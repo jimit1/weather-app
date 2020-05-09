@@ -3,9 +3,10 @@ $(document).ready(function () {
   try {
     var storeData = JSON.parse(window.localStorage.getItem("storeData"));
   } catch {
-    storeData = [];
+    error;
   }
   var apiKey = "4111e023973fe890e04bc759096a45fd";
+  var icon = "";
 
   if (storeData !== null) {
     for (var i = 0; i < storeData.length; i++) {
@@ -55,18 +56,20 @@ $(document).ready(function () {
       dataType: "json",
       url: `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`,
     }).then(function (res) {
-      console.log(res);
       render(cityName, res);
     });
   }
   function render(cityName, res) {
     console.log(res);
+    icon = res.current.weather[0].icon;
+    $(".right-panel").html("");
     $(".right-panel").prepend(
       `<div class="card" style="max-width: 49rem;">
             <div class="card-body">
+            <div class="inline-flex">
               <h5 class="card-title">${cityName} (${
         timeConverter(res.current.dt).date
-      })</h5>
+      })</h5><img style="float:left" src="http://openweathermap.org/img/wn/${icon}@2x.png"/></div>
               <div class="card-text">Temperature: ${(
                 (res.current.temp - 273.15) * 1.8 +
                 32
@@ -80,16 +83,17 @@ $(document).ready(function () {
           </div><h3 class="pt-3">5-Day Forecast:</h3><div class="row" id="forecast"></div>`
     );
     for (var i = 1; i < 6; i++) {
+      icon = res.daily[i].weather[0].icon;
       $("#forecast").append(`
       <div class="card ml-3 mb-3" style="max-width: 9rem;">
         <div class="card-body bg-dark text-light">
           <h5 class="card-title">${timeConverter(res.daily[i].dt).date}</h5>
-          <div class="card-text">${res.daily[i].weather[0].main}</div>
+          <div class="card-text"><img src="http://openweathermap.org/img/wn/${icon}@2x.png"/></div>
           <div class="card-text">${(
             (res.daily[i].temp.day - 273.15) * 1.8 +
             32
           ).toFixed(2)} °F</div>
-          <div class="card-text">Humidity: ${res.daily[i].humidity} %</div>
+          <div class="card-text">Humidity:${res.daily[i].humidity}%</div>
         
       </div>
     </div>`);
@@ -98,7 +102,6 @@ $(document).ready(function () {
 
   $("#submitBtn").on("click", function (e) {
     e.preventDefault();
-
     textInput = $("#textInput").val();
     if (!storeData) {
       storeData = [];
@@ -113,7 +116,6 @@ $(document).ready(function () {
         )}">${storeData[storeData.length - 1]}</li>`
       );
     }
-
     $("#textInput").val("");
     runWeather(textInput);
   });
