@@ -6,3 +6,17 @@
 .right-panel {
   background-color: white;
 }
+
+.navbar {
+  justify-content: space-around;
+  font-size: 2rem;
+}
+
+html {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.uvI {
+  width: 92px;
+}
